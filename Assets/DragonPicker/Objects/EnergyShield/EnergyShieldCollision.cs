@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DragonPicker
 {
@@ -15,6 +16,7 @@ namespace DragonPicker
             if (collision.gameObject.CompareTag("Dragon Egg"))
             {
                 Destroy(collision.gameObject);
+                GameplayManager.Instance.IncreaseScore();
             }
         }
     }

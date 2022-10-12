@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DragonPicker
 {
@@ -7,14 +8,19 @@ namespace DragonPicker
     {
         [SerializeField] private GameObject explosionEffectPrefab;
 
-        private void OnCollisionEnter(Collision collision)
+        public void Explode()
         {
-            if (collision.gameObject.CompareTag("Energy Shield"))
-                return;
-
             var explosion = Instantiate(explosionEffectPrefab);
             explosion.transform.position = transform.position;
             Destroy(gameObject);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!collision.gameObject.CompareTag("Energy Shield"))
+            {
+                GameplayManager.Instance.ClearEggsOnScreen();
+            }
         }
     }
 }
