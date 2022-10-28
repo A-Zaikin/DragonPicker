@@ -8,6 +8,13 @@ namespace DragonPicker
     {
         [SerializeField] private GameObject effectPrefab;
 
+        private AudioSource audioEffect;
+
+        private void Awake()
+        {
+            audioEffect = GetComponent<AudioSource>();
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             var effect = Instantiate(effectPrefab, transform);
@@ -17,6 +24,7 @@ namespace DragonPicker
             {
                 Destroy(collision.gameObject);
                 GameplayManager.Instance.IncreaseScore();
+                audioEffect.Play();
             }
         }
     }

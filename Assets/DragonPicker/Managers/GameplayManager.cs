@@ -12,6 +12,8 @@ namespace DragonPicker
 
         [SerializeField] private TextMeshProUGUI scoreLabel;
         [SerializeField] private GameObject defeatScreen;
+        [SerializeField] private GameObject mage;
+        [SerializeField] private GameObject mageLight;
         [SerializeField] private GameObject energyShield;
         [SerializeField] private int startHealth;
         [SerializeField] private float shieldLayerRadius;
@@ -22,6 +24,7 @@ namespace DragonPicker
 
         private int score;
         private List<GameObject> energyShieldLayers = new();
+        private AudioSource eggMissedAudioEffect;
 
         public void IncreaseScore()
         {
@@ -48,8 +51,12 @@ namespace DragonPicker
             if (energyShieldLayers.Count == 0)
             {
                 defeatScreen.SetActive(true);
+                energyShield.SetActive(false);
+                mage.GetComponent<Animator>().SetBool("IsAlive", false);
+                mageLight.SetActive(false);
                 StartCoroutine(RestartLevelCoroutine());
             }
+            eggMissedAudioEffect.Play();
         }
 
         private IEnumerator RestartLevelCoroutine()
@@ -68,6 +75,7 @@ namespace DragonPicker
             {
                 Instance = this;
             }
+            eggMissedAudioEffect = GetComponent<AudioSource>();
         }
 
         private void Start()

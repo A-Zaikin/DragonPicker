@@ -8,6 +8,8 @@ namespace DragonPicker
     {
         [SerializeField] private GameObject explosionEffectPrefab;
 
+        private bool isExploded = false;
+
         public void Explode()
         {
             var explosion = Instantiate(explosionEffectPrefab);
@@ -17,8 +19,9 @@ namespace DragonPicker
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!collision.gameObject.CompareTag("Energy Shield"))
+            if (!collision.gameObject.CompareTag("Energy Shield") && !isExploded)
             {
+                isExploded = true;
                 GameplayManager.Instance.OnEggMissed();
             }
         }

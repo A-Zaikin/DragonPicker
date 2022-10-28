@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/DragonPicker/Scenes/MainMenuScene.unity
+    guid: df4f7a072493ad344beab5f1c1f64bc8
+  - enabled: 1
     path: Assets/DragonPicker/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
