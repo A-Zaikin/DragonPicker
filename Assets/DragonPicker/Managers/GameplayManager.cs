@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 namespace DragonPicker
 {
@@ -11,6 +12,7 @@ namespace DragonPicker
         public static GameplayManager Instance { get; private set; }
 
         [SerializeField] private TextMeshProUGUI scoreLabel;
+        [SerializeField] private TextMeshProUGUI playerNameLabel;
         [SerializeField] private GameObject defeatScreen;
         [SerializeField] private GameObject mage;
         [SerializeField] private GameObject mageLight;
@@ -29,6 +31,12 @@ namespace DragonPicker
         public void IncreaseScore()
         {
             score++;
+            if (score > YandexGame.savesData.maxScore)
+            {
+                YandexGame.savesData.maxScore = score;
+                YandexGame.SaveProgress();
+                YandexGame.NewLeaderboardScores("TopPlayers", score);
+            }
             scoreLabel.text = $"Score: {score}";
         }
 
@@ -81,6 +89,7 @@ namespace DragonPicker
         private void Start()
         {
             CreateShield();
+            SdkDataReceived();
         }
 
         private void CreateShield()
@@ -92,6 +101,18 @@ namespace DragonPicker
                 energyShieldLayers.Add(layer);
             }
             energyShield.GetComponent<SphereCollider>().radius = startHealth * shieldLayerRadius;
+        }
+
+        private void OnEnable() => YandexGame.GetDataEvent += SdkDataReceived;
+
+        private void OnDisable() => YandexGame.GetDataEvent -= SdkDataReceived;
+
+        private void SdkDataReceived()
+        {
+            if (YandexGame.SDKEnabled && YandexGame.auth)
+            {
+                playerNameLabel.text = YandexGame.playerName;
+            }
         }
     }
 }
