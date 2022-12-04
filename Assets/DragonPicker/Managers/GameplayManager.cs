@@ -31,6 +31,18 @@ namespace DragonPicker
         public void IncreaseScore()
         {
             score++;
+            if (score >= 1)
+            {
+                AchievementManager.Instance.CompleteAchievement(1);
+            }
+            if (score >= 10)
+            {
+                AchievementManager.Instance.CompleteAchievement(2);
+            }
+            if (score >= 20)
+            {
+                AchievementManager.Instance.CompleteAchievement(3);
+            }
             if (score > YandexGame.savesData.maxScore)
             {
                 YandexGame.savesData.maxScore = score;
@@ -62,6 +74,7 @@ namespace DragonPicker
                 energyShield.SetActive(false);
                 mage.GetComponent<Animator>().SetBool("IsAlive", false);
                 mageLight.SetActive(false);
+                AchievementManager.Instance.CompleteAchievement(0);
                 StartCoroutine(RestartLevelCoroutine());
             }
             eggMissedAudioEffect.Play();

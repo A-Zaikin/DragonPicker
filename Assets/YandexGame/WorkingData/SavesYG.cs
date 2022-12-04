@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.Generic;
+
 namespace YG
 {
     [System.Serializable]
@@ -11,5 +14,6 @@ namespace YG
 
         // Ваши сохранения
         public int maxScore;
+        public int[] achievementIds = Array.Empty<int>();
     }
 }

@@ -1,11 +1,9 @@
-using System;
-using TMPro;
 using UnityEngine;
 using YG;
 
-public class MenuManager : MonoBehaviour
+public class AchievementsMenu : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI maxScoreLabel;
+    [SerializeField] private GameObject achievementPrefab;
 
     private void OnEnable() => YandexGame.GetDataEvent += SdkDataReceived;
 
@@ -17,12 +15,18 @@ public class MenuManager : MonoBehaviour
         {
             return;
         }
-
-        maxScoreLabel.text = $"Best score: {YandexGame.savesData.maxScore}";
     }
 
     private void Start()
     {
         SdkDataReceived();
+    }
+
+    private void CreateUI()
+    {
+        foreach (var achievement in AchievementManager.Instance.CompletedAchievements)
+        {
+            var achievementUI = Instantiate(achievementPrefab, transform);
+        }
     }
 }
