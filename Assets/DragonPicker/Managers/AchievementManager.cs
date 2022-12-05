@@ -7,10 +7,10 @@ using YG;
 
 public class AchievementManager : MonoBehaviour
 {
-    [SerializeField] private List<string> achievements;
+    [SerializeField] private List<AchievementSO> achievements;
 
     public static AchievementManager Instance;
-    public List<string> CompletedAchievements { get; private set; } = new();
+    public List<AchievementSO> CompletedAchievements { get; private set; } = new();
 
     private void OnEnable() => YandexGame.GetDataEvent += SdkDataReceived;
 

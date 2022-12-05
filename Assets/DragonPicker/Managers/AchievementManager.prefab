@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   achievements:
-  - Lose a game
-  - Collect 1 egg
-  - Collect 10 eggs
-  - Collect 20 eggs
+  - {fileID: 11400000, guid: 818b920e32320064782192f050c4e10b, type: 2}
+  - {fileID: 11400000, guid: 43e553d215e4e6e42a12157363709baa, type: 2}
+  - {fileID: 11400000, guid: 6fc9500c1b3426343898c866bb5cea13, type: 2}

@@ -34,8 +34,11 @@ namespace DragonPicker
             if (YandexGame.SDKEnabled && isFirstLaunch)
             {
                 Debug.Log($"SDK available\nWaiting for authorization...");
-                authorizationCheck?.Invoke();
                 isFirstLaunch = false;
+                if (!YandexGame.auth)
+                {
+                    authorizationCheck?.Invoke();
+                }
             }
         }
     }
