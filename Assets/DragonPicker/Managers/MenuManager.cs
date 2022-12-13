@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -6,8 +5,13 @@ using YG;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI maxScoreLabel;
+    [SerializeField] private TextMeshProUGUI onlineLabel;
 
-    private void OnEnable() => YandexGame.GetDataEvent += SdkDataReceived;
+    private void OnEnable()
+    {
+        onlineLabel.text = "Offline";
+        YandexGame.GetDataEvent += SdkDataReceived;
+    }
 
     private void OnDisable() => YandexGame.GetDataEvent -= SdkDataReceived;
 
@@ -18,6 +22,7 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
+        onlineLabel.text = "Online";
         maxScoreLabel.text = $"Best score: {YandexGame.savesData.maxScore}";
     }
 

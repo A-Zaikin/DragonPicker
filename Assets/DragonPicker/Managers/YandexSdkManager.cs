@@ -14,6 +14,7 @@ namespace DragonPicker
         public void ResolvedAuthorization()
         {
             Debug.Log($"SDK available\nResolved authorization\nPlayer name: \"{YandexGame.playerName}\"");
+            YandexGame.RewVideoShow(0);
         }
 
         public void RejectedAuthorization()

@@ -74,6 +74,7 @@ namespace DragonPicker
                 energyShield.SetActive(false);
                 mage.GetComponent<Animator>().SetBool("IsAlive", false);
                 mageLight.SetActive(false);
+                YandexGame.RewVideoShow(0);
                 AchievementManager.Instance.CompleteAchievement(0);
                 StartCoroutine(RestartLevelCoroutine());
             }
